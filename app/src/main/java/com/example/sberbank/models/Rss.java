@@ -1,4 +1,4 @@
-package com.example.sberbank;
+package com.example.sberbank.models;
 
 import com.example.sberbank.models.Channel;
 
