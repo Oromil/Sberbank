@@ -24,7 +24,7 @@ public class ImageLoader extends AsyncTask<String, Void, Bitmap> {
             URL url = new URL(strings[0]);
             image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
         } catch (Exception e) {
-            mCallback.onFailure(e);
+            e.printStackTrace();
         }
         return image;
     }
@@ -33,5 +33,6 @@ public class ImageLoader extends AsyncTask<String, Void, Bitmap> {
     protected void onPostExecute(Bitmap bitmap) {
         if (bitmap != null)
             mCallback.onSuccess(bitmap);
+        else mCallback.onFailure(new Exception());
     }
 }

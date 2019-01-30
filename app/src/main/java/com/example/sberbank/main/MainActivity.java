@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.example.sberbank.R;
-import com.example.sberbank.models.Post;
+import com.example.sberbank.models.PostEntity;
 
 import java.util.List;
 
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     }
 
     @Override
-    public void updateData(List<Post> data) {
+    public void updateData(List<PostEntity> data) {
         mAdapter.updateData(data);
     }
 }
