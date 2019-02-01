@@ -3,6 +3,8 @@ package com.example.sberbank.models;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class Post {
@@ -12,7 +14,7 @@ public class Post {
     String description;
     @Element(name = "pubDate", required = false)
     String date;
-    @Element(name = "dc:creator", required = false)
+    @Element(name = "creator", required = false)
     String creator;
     @Element(name = "guid")
     String link;
@@ -29,11 +31,30 @@ public class Post {
     }
 
     public String getDate() {
-        return date;
+        SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+        Date date1 = new Date(date);
+        return df.format(date1);
+    }
+
+    public String getTime(){
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+        Date date1 = new Date(date);
+        return df.format(date1);
     }
 
     public List<String> getTags() {
         return tags;
+    }
+
+    public String getTagsAsString() {
+        String tagsString = "";
+        for (int i = 0; i < tags.size(); i++) {
+            tagsString = tagsString.concat(tags.get(i));
+            if (i != tags.size() - 1) {
+                tagsString = tagsString.concat(", ");
+            }
+        }
+        return tagsString;
     }
 
     public String getLink() {

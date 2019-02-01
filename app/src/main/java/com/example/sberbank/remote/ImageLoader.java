@@ -22,7 +22,7 @@ public class ImageLoader extends AsyncTask<String, Void, Bitmap> {
 
         try {
             URL url = new URL(strings[0]);
-            image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            image = BitmapFactory.decodeStream(url.openStream());
         } catch (Exception e) {
             e.printStackTrace();
         }

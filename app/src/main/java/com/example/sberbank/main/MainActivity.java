@@ -11,8 +11,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import android.widget.Toast;
 import com.example.sberbank.R;
-import com.example.sberbank.models.PostEntity;
+import com.example.sberbank.models.Post;
 
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
         swipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                mPresenter.loadData();
             }
         });
     }
@@ -58,10 +59,16 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     @Override
     public void showProgress(boolean show) {
         progressBar.setVisibility(View.GONE);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
-    public void updateData(List<PostEntity> data) {
+    public void updateData(List<Post> data) {
         mAdapter.updateData(data);
+    }
+
+    @Override
+    public  void showNetworkError(){
+        Toast.makeText(this, "Error", Toast.LENGTH_LONG).show();
     }
 }

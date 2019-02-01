@@ -1,24 +1,27 @@
 package com.example.sberbank.main;
 
-import android.graphics.Bitmap;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.text.Editable;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.sberbank.R;
-import com.example.sberbank.models.PostEntity;
-import com.example.sberbank.remote.ImageLoader;
-import com.example.sberbank.remote.ResponseCallback;
+import com.example.sberbank.base.MyImageGetter;
+import com.example.sberbank.models.Post;
+import org.xml.sax.XMLReader;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PostsAdapter extends Adapter<PostsAdapter.PostViewHolder> {
 
-    private List<PostEntity> postsList;
+    private List<Post> postsList;
 
     public PostsAdapter() {
         postsList = new ArrayList();
@@ -34,23 +37,20 @@ public class PostsAdapter extends Adapter<PostsAdapter.PostViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull final PostViewHolder postViewHolder, int i) {
         postViewHolder.imageView.setImageBitmap(null);
-        PostEntity item = postsList.get(i);
+        Post item = postsList.get(i);
         postViewHolder.tvTitle.setText(item.getTitle());
-        postViewHolder.tvContent.setText(item.getContent());
-        postViewHolder.tvDate.setText(item.getDate());
-        postViewHolder.tvTags.setText(item.getTags());
-        new ImageLoader(new ResponseCallback<Bitmap>() {
-            @Override
-            public void onSuccess(Bitmap response) {
-                postViewHolder.imageView.setVisibility(View.VISIBLE);
-                postViewHolder.imageView.setImageBitmap(response);
-            }
+        postViewHolder.tvContent.setText(Html.fromHtml(item.getDescription(),
+                postViewHolder.imageGetter,
+                new Html.TagHandler() {
+                    @Override
+                    public void handleTag(boolean opening, String tag, Editable output, XMLReader xmlReader) {
+                    }
+                }));
 
-            @Override
-            public void onFailure(Exception e) {
-                postViewHolder.imageView.setVisibility(View.GONE);
-            }
-        }).execute(item.getImageUrl());
+        postViewHolder.tvDate.setText(String.format(postViewHolder.context.getString(R.string.date_text), item.getDate(), item.getTime()));
+        postViewHolder.tvTags.setText(item.getTagsAsString());
+        if (item.getCreator()!=null)
+            postViewHolder.tvCreator.setText(String.format(postViewHolder.context.getString(R.string.creator_text), item.getCreator()));
     }
 
     @Override
@@ -58,7 +58,7 @@ public class PostsAdapter extends Adapter<PostsAdapter.PostViewHolder> {
         return postsList.size();
     }
 
-    public void updateData(List<PostEntity> data) {
+    public void updateData(List<Post> data) {
         postsList.clear();
         postsList.addAll(data);
         notifyDataSetChanged();
@@ -66,20 +66,26 @@ public class PostsAdapter extends Adapter<PostsAdapter.PostViewHolder> {
 
     class PostViewHolder extends ViewHolder {
 
-        protected TextView tvTitle;
-        protected TextView tvContent;
-        protected TextView tvDate;
-        protected ImageView imageView;
+        Context context;
+        TextView tvTitle;
+        TextView tvContent;
+        TextView tvDate;
+        ImageView imageView;
         TextView tvTags;
+        MyImageGetter imageGetter;
+        TextView tvCreator;
 
-        public PostViewHolder(View itemView) {
+        PostViewHolder(View itemView) {
             super(itemView);
-
+            context = itemView.getContext();
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvContent = itemView.findViewById(R.id.tvContent);
+            tvContent.setMovementMethod(LinkMovementMethod.getInstance());
             tvDate = itemView.findViewById(R.id.tvDate);
             imageView = itemView.findViewById(R.id.imageView);
             tvTags = itemView.findViewById(R.id.tvTags);
+            imageGetter = new MyImageGetter(tvContent);
+            tvCreator = itemView.findViewById(R.id.tvCreator);
         }
     }
 }

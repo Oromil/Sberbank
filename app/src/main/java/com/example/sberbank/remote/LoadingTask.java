@@ -2,15 +2,13 @@ package com.example.sberbank.remote;
 
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-
 import org.simpleframework.xml.core.Persister;
 
 import javax.net.ssl.HttpsURLConnection;
-
 import java.io.*;
 import java.net.URL;
 
-public class LoadingTask<R> extends AsyncTask<String, Void, R> {
+public class LoadingTask<R> extends AsyncTask<String, Void, LoadingTask.Result<R>> {
     private String REQUEST_TYPE = "GET";
     private int TIMEOUT = 10000;
 
@@ -25,21 +23,25 @@ public class LoadingTask<R> extends AsyncTask<String, Void, R> {
     }
 
     @Override
-    protected R doInBackground(String... strings) {
+    protected Result<R> doInBackground(String... strings) {
+        Result<R> result = new Result<>();
         try {
             createConnection(strings[0]);
             String responseString = loadData();
-            return parse(responseString);
+            result.result = parse(responseString);
+            result.status = Result.Status.SUCCESS;
+            return result;
         } catch (Exception e) {
-            mCallback.onFailure(e);
-            return null;
+            result.exception = e;
+            return result;
         }
     }
 
     @Override
-    protected void onPostExecute(R response) {
-        if (response != null)
-            mCallback.onSuccess(response);
+    protected void onPostExecute(Result<R> result) {
+        if (result.status == Result.Status.SUCCESS)
+            mCallback.onSuccess(result.result);
+        else mCallback.onFailure(result.exception);
     }
 
     private void createConnection(String urlString) throws IOException {
@@ -65,5 +67,18 @@ public class LoadingTask<R> extends AsyncTask<String, Void, R> {
         Reader reader = new StringReader(content);
         Persister serializer = new Persister();
         return serializer.read(type, reader, false);
+    }
+
+    protected static class Result<R> {
+        enum Status {SUCCESS, FAILURE}
+
+        private R result;
+        private Exception exception;
+        private Status status = Status.FAILURE;
+
+        Result() {
+            result = null;
+            exception = new Exception("unknown exception");
+        }
     }
 }
