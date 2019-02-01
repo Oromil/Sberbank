@@ -1,4 +1,4 @@
-package com.example.sberbank.remote;
+package com.oromil.sberbank.remote;
 
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;

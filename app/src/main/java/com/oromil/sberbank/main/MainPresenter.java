@@ -1,9 +1,9 @@
-package com.example.sberbank.main;
+package com.oromil.sberbank.main;
 
-import com.example.sberbank.base.BasePresenter;
-import com.example.sberbank.models.Rss;
-import com.example.sberbank.remote.HabrPostsInteractor;
-import com.example.sberbank.remote.ResponseCallback;
+import com.oromil.sberbank.base.BasePresenter;
+import com.oromil.sberbank.models.Rss;
+import com.oromil.sberbank.remote.HabrPostsInteractor;
+import com.oromil.sberbank.remote.ResponseCallback;
 
 public class MainPresenter extends BasePresenter<MainViewContract> {
 

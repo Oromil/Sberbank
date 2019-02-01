@@ -1,4 +1,4 @@
-package com.example.sberbank.base;
+package com.oromil.sberbank.base;
 
 public abstract class BasePresenter<V extends ViewContract> implements Presenter<V> {
 

@@ -1,4 +1,4 @@
-package com.example.sberbank.main;
+package com.oromil.sberbank.main;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,8 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import com.example.sberbank.R;
-import com.example.sberbank.models.Post;
+import com.oromil.sberbank.R;
+import com.oromil.sberbank.models.Post;
 
 import java.util.List;
 

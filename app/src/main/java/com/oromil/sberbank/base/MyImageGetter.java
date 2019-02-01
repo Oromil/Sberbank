@@ -1,4 +1,4 @@
-package com.example.sberbank.base;
+package com.oromil.sberbank.base;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -6,8 +6,8 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LevelListDrawable;
 import android.text.Html;
 import android.widget.TextView;
-import com.example.sberbank.remote.ImageLoader;
-import com.example.sberbank.remote.ResponseCallback;
+import com.oromil.sberbank.remote.ImageLoader;
+import com.oromil.sberbank.remote.ResponseCallback;
 
 public class MyImageGetter implements Html.ImageGetter {
 

@@ -1,4 +1,4 @@
-package com.example.sberbank;
+package com.oromil.sberbank;
 
 import org.junit.Test;
 

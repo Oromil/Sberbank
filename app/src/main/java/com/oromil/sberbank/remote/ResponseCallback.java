@@ -1,4 +1,4 @@
-package com.example.sberbank.remote;
+package com.oromil.sberbank.remote;
 
 public interface ResponseCallback<M> {
     void onSuccess(M response);

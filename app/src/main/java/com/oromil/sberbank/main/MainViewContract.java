@@ -1,7 +1,7 @@
-package com.example.sberbank.main;
+package com.oromil.sberbank.main;
 
-import com.example.sberbank.base.ViewContract;
-import com.example.sberbank.models.Post;
+import com.oromil.sberbank.base.ViewContract;
+import com.oromil.sberbank.models.Post;
 
 import java.util.List;
 

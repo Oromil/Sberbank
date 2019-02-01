@@ -1,4 +1,4 @@
-package com.example.sberbank.base;
+package com.oromil.sberbank.base;
 
 public interface Presenter<V extends ViewContract> {
 

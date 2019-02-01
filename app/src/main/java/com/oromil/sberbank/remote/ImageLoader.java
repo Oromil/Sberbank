@@ -1,4 +1,4 @@
-package com.example.sberbank.remote;
+package com.oromil.sberbank.remote;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

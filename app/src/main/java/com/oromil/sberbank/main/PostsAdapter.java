@@ -1,4 +1,4 @@
-package com.example.sberbank.main;
+package com.oromil.sberbank.main;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,9 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.example.sberbank.R;
-import com.example.sberbank.base.MyImageGetter;
-import com.example.sberbank.models.Post;
+import com.oromil.sberbank.R;
+import com.oromil.sberbank.base.MyImageGetter;
+import com.oromil.sberbank.models.Post;
 import org.xml.sax.XMLReader;
 
 import java.util.ArrayList;

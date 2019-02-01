@@ -1,4 +1,4 @@
-package com.example.sberbank.models;
+package com.oromil.sberbank.models;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;

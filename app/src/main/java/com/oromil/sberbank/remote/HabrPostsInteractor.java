@@ -1,6 +1,6 @@
-package com.example.sberbank.remote;
+package com.oromil.sberbank.remote;
 
-import com.example.sberbank.models.Rss;
+import com.oromil.sberbank.models.Rss;
 
 public class HabrPostsInteractor {
 
