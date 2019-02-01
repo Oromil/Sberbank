@@ -4,7 +4,7 @@ import com.example.sberbank.models.Rss;
 
 public class HabrPostsInteractor {
 
-    private String URL = "https://habrahabr.ru/rss/hubs/all/";
+    private final String URL = "https://habrahabr.ru/rss/hubs/all/";
 
     private static HabrPostsInteractor instance;
 
@@ -21,6 +21,6 @@ public class HabrPostsInteractor {
     }
 
     public void getData(ResponseCallback<Rss> callback) {
-        new LoadingTask<Rss>(Rss.class, callback).execute(URL);
+        new LoadingTask<>(Rss.class, callback).execute(URL);
     }
 }

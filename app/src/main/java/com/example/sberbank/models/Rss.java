@@ -1,7 +1,5 @@
 package com.example.sberbank.models;
 
-import com.example.sberbank.models.Channel;
-
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
@@ -11,7 +9,7 @@ import java.util.List;
 public class Rss {
 
     @Element(name = "channel")
-    Channel channel;
+    private Channel channel;
 
     public List<Post> getPosts() {
         return channel.items;

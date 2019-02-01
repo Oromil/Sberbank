@@ -16,9 +16,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"/>
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <ProgressBar
@@ -29,4 +30,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+            android:id="@+id/btnTop"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:background="@drawable/btn_top_backgr"
+            android:drawableEnd="@drawable/ic_arrow_up"
+            android:drawableRight="@drawable/ic_arrow_up"
+            android:layout_marginTop="16dp"
+            android:text="@string/top_btn_text"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible"/>
+
+    <include
+            android:id="@+id/emptyView"
+            layout="@layout/view_empty"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="visible"/>
 </android.support.constraint.ConstraintLayout>

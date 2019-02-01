@@ -10,7 +10,6 @@ import java.net.URL;
 
 public class LoadingTask<R> extends AsyncTask<String, Void, LoadingTask.Result<R>> {
     private String REQUEST_TYPE = "GET";
-    private int TIMEOUT = 10000;
 
     private Class<R> type;
     private ResponseCallback<R> mCallback;
@@ -48,7 +47,6 @@ public class LoadingTask<R> extends AsyncTask<String, Void, LoadingTask.Result<R
         URL url = new URL(urlString);
         connection = (HttpsURLConnection) url.openConnection();
         connection.setRequestMethod(REQUEST_TYPE);
-        connection.setReadTimeout(TIMEOUT);
         connection.connect();
     }
 
@@ -69,7 +67,7 @@ public class LoadingTask<R> extends AsyncTask<String, Void, LoadingTask.Result<R
         return serializer.read(type, reader, false);
     }
 
-    protected static class Result<R> {
+    static class Result<R> {
         enum Status {SUCCESS, FAILURE}
 
         private R result;

@@ -9,7 +9,7 @@ public class MainPresenter extends BasePresenter<MainViewContract> {
 
     private HabrPostsInteractor mHabrPostsInteractor;
 
-    public MainPresenter(){
+    MainPresenter() {
         mHabrPostsInteractor = HabrPostsInteractor.getInstance();
     }
 
@@ -18,7 +18,7 @@ public class MainPresenter extends BasePresenter<MainViewContract> {
         loadData();
     }
 
-    public void loadData(){
+    void loadData() {
         mHabrPostsInteractor.getData(new ResponseCallback<Rss>() {
             @Override
             public void onSuccess(Rss response) {

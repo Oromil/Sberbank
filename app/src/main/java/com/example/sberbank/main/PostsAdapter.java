@@ -48,7 +48,7 @@ public class PostsAdapter extends Adapter<PostsAdapter.PostViewHolder> {
                 }));
 
         postViewHolder.tvDate.setText(String.format(postViewHolder.context.getString(R.string.date_text), item.getDate(), item.getTime()));
-        postViewHolder.tvTags.setText(item.getTagsAsString());
+        postViewHolder.tvTags.setText(String.format(postViewHolder.context.getString(R.string.tags_text), item.getTagsAsString()));
         if (item.getCreator()!=null)
             postViewHolder.tvCreator.setText(String.format(postViewHolder.context.getString(R.string.creator_text), item.getCreator()));
     }

@@ -1,9 +1,15 @@
 <resources>
-    <string name="app_name">Sberbank</string>
-    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="app_name" translatable="false">SberbankTest</string>
+    <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
 
-    <!--<string name="date_text">Published: </string>-->
-    <string name="tags_text">Tags: </string>
-    <string name="date_text" formatted="false">Published: %s in %s</string>
-    <string name="creator_text" formatted="false">Creator: %s</string>
+    <string name="tags_text">Tags: %s</string>
+    <string name="date_text">Published: %s in %s</string>
+    <string name="creator_text">Creator: %s</string>
+
+    <string name="top_btn_text">To top</string>
+
+    <string name="network_error">Failed to load data! Please check your Internet connection</string>
+    <string name="empty_view_text">Sorry, but we couldn\'t load the data. Try to check your Internet connection and
+        update with swipe
+    </string>
 </resources>

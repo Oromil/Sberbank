@@ -1,16 +1,16 @@
 package com.example.sberbank.main;
 
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
-
 import android.widget.Toast;
 import com.example.sberbank.R;
 import com.example.sberbank.models.Post;
@@ -22,8 +22,10 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
     private MainPresenter mPresenter;
     private ProgressBar progressBar;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private RecyclerView recyclerView;
     private PostsAdapter mAdapter;
+    private RecyclerView recyclerView;
+    private Button btnTop;
+    private View emptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,22 +38,53 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
         mPresenter.attachView(this);
     }
 
+    @Override
+    protected void onDestroy() {
+        mPresenter.detachView();
+        super.onDestroy();
+    }
+
     private void initViews() {
-
         progressBar = findViewById(R.id.progressBar);
+        btnTop = findViewById(R.id.btnTop);
         swipeRefreshLayout = findViewById(R.id.swipeLayout);
-        recyclerView = findViewById(R.id.recyclerView);
+        emptyView = findViewById(R.id.emptyView);
+        initRecyclerView();
+        initRecyclerScrollListener();
 
+        btnTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.scrollToPosition(0);
+            }
+        });
+
+        swipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                emptyView.setVisibility(View.GONE);
+                mPresenter.loadData();
+            }
+        });
+    }
+
+    private void initRecyclerView() {
+        recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL));
         mAdapter = new PostsAdapter();
         recyclerView.setAdapter(mAdapter);
+    }
 
-        swipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+    private void initRecyclerScrollListener() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onRefresh() {
-                mPresenter.loadData();
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (dy < 0 &&
+                        ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition() != 0) {
+                    btnTop.setVisibility(View.VISIBLE);
+                } else btnTop.setVisibility(View.GONE);
             }
         });
     }
@@ -69,6 +102,8 @@ public class MainActivity extends AppCompatActivity implements MainViewContract 
 
     @Override
     public  void showNetworkError(){
-        Toast.makeText(this, "Error", Toast.LENGTH_LONG).show();
+        if (recyclerView.getAdapter().getItemCount() == 0)
+            emptyView.setVisibility(View.VISIBLE);
+        Toast.makeText(this, getText(R.string.network_error), Toast.LENGTH_LONG).show();
     }
 }

@@ -1,0 +1,13 @@
+<resources>
+
+    <string name="tags_text">Тэги: %s</string>
+    <string name="date_text">Опубликовано: %s в %s</string>
+    <string name="creator_text">Автор: %s</string>
+
+    <string name="top_btn_text">Наверх</string>
+
+    <string name="network_error">Не удалось загрузить данные! Проверьте подключение к интернету</string>
+    <string name="empty_view_text">Извините, но нам не удалось загрузить данные. Попробуйте проверить интернет
+        соединение и обновить с помощью свайпа
+    </string>
+</resources>

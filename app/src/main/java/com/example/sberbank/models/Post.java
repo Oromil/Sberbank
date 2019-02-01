@@ -9,18 +9,16 @@ import java.util.List;
 
 public class Post {
     @Element(name = "title", required = false)
-    String title;
+    private String title;
     @Element(name = "description", required = false)
-    String description;
+    private String description;
     @Element(name = "pubDate", required = false)
-    String date;
+    private String date;
     @Element(name = "creator", required = false)
-    String creator;
-    @Element(name = "guid")
-    String link;
+    private String creator;
 
     @ElementList(entry = "category", inline = true)
-    List<String>tags;
+    private List<String> tags;
 
     public String getTitle() {
         return title;
@@ -42,10 +40,6 @@ public class Post {
         return df.format(date1);
     }
 
-    public List<String> getTags() {
-        return tags;
-    }
-
     public String getTagsAsString() {
         String tagsString = "";
         for (int i = 0; i < tags.size(); i++) {
@@ -55,10 +49,6 @@ public class Post {
             }
         }
         return tagsString;
-    }
-
-    public String getLink() {
-        return link;
     }
 
     public String getCreator() {
