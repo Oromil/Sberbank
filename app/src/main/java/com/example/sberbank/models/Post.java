@@ -11,4 +11,16 @@ public class Post {
     String date;
     @Element(name = "dc:creator", required = false)
     String creator;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getDate() {
+        return date;
+    }
 }

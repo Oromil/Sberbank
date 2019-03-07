@@ -1,9 +1,12 @@
 package com.example.sberbank.remote;
 
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+
 import org.simpleframework.xml.core.Persister;
 
 import javax.net.ssl.HttpsURLConnection;
+
 import java.io.*;
 import java.net.URL;
 
@@ -15,7 +18,8 @@ public class LoadingTask<R> extends AsyncTask<String, Void, R> {
     private ResponseCallback<R> mCallback;
     private HttpsURLConnection connection;
 
-    public LoadingTask(Class<R> responseClass, ResponseCallback<R> responseCallback) {
+    public LoadingTask(@NonNull Class<R> responseClass,
+                       @NonNull ResponseCallback<R> responseCallback) {
         type = responseClass;
         mCallback = responseCallback;
     }

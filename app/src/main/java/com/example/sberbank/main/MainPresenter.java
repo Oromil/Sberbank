@@ -21,11 +21,13 @@ public class MainPresenter extends BasePresenter<MainViewContract> {
             @Override
             public void onSuccess(Rss response) {
                 Log.d("", "");
+                mView.updateData(response.getPosts());
                 mView.showProgress(false);
             }
 
             @Override
             public void onFailure(Exception e) {
+
                 e.printStackTrace();
             }
         });
